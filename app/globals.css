@@ -1,130 +1,369 @@
+/* globals.css - Tailwind CSS v4 with Notion Design System */
+
 @import "tailwindcss";
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
 
-@custom-variant dark (&:is(.dark *));
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-sans);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
-  --color-card: var(--card);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
+/* ----------------------------
+   1. Custom Font (NotionInter)
+   ---------------------------- */
+@font-face {
+  font-family: 'NotionInter';
+  src: url('/fonts/NotionInter.woff2') format('woff2');
+  font-weight: 400 700;
+  font-display: swap;
+  /* fallback: system fonts will be used if custom font fails */
 }
 
-:root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+/* ----------------------------
+   2. Theme Configuration
+   ---------------------------- */
+@theme {
+  /* ----- Font Family ----- */
+  --font-sans: 'NotionInter', 'Inter', -apple-system, system-ui, 'Segoe UI', Helvetica,
+    'Apple Color Emoji', Arial, 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+
+  /* ----- Color Palette ----- */
+  --color-*: initial; /* disable default colors to enforce Notion palette */
+
+  /* Primary & neutrals */
+  --color-white: #ffffff;
+  --color-black: rgba(0, 0, 0, 0.95);        /* near-black text */
+  --color-notion-blue: #0075de;
+  --color-notion-blue-dark: #005bab;
+  --color-notion-blue-light: #62aef0;
+  --color-focus-blue: #097fe8;
+
+  /* Warm gray scale */
+  --color-warm-white: #f6f5f4;
+  --color-warm-dark: #31302e;
+  --color-warm-gray-500: #615d59;
+  --color-warm-gray-300: #a39e98;
+
+  /* Semantic accents */
+  --color-teal: #2a9d99;
+  --color-green: #1aae39;
+  --color-orange: #dd5b00;
+  --color-pink: #ff64c8;
+  --color-purple: #391c57;
+  --color-brown: #523410;
+  --color-deep-navy: #213183;
+
+  /* Badge & interactive backgrounds */
+  --color-badge-blue-bg: #f2f9ff;
+  --color-badge-blue-text: #097fe8;
+
+  /* ----- Typography Scale (with custom letter-spacing & line-height) ----- */
+  --font-size-display-hero: 64px;
+  --line-height-display-hero: 1.00;
+  --letter-spacing-display-hero: -2.125px;
+
+  --font-size-display-secondary: 54px;
+  --line-height-display-secondary: 1.04;
+  --letter-spacing-display-secondary: -1.875px;
+
+  --font-size-section-heading: 48px;
+  --line-height-section-heading: 1.00;
+  --letter-spacing-section-heading: -1.5px;
+
+  --font-size-subheading-large: 40px;
+  --line-height-subheading-large: 1.50;
+
+  --font-size-subheading: 26px;
+  --line-height-subheading: 1.23;
+  --letter-spacing-subheading: -0.625px;
+
+  --font-size-card-title: 22px;
+  --line-height-card-title: 1.27;
+  --letter-spacing-card-title: -0.25px;
+
+  --font-size-body-large: 20px;
+  --line-height-body-large: 1.40;
+  --letter-spacing-body-large: -0.125px;
+
+  --font-size-body: 16px;
+  --line-height-body: 1.50;
+
+  --font-size-nav: 15px;
+  --line-height-nav: 1.33;
+
+  --font-size-caption: 14px;
+  --line-height-caption: 1.43;
+
+  --font-size-badge: 12px;
+  --line-height-badge: 1.33;
+  --letter-spacing-badge: 0.125px;
+
+  /* ----- Box Shadows (multi-layer stacks) ----- */
+  --shadow-card: 0px 4px 18px rgba(0, 0, 0, 0.04),
+    0px 2.025px 7.84688px rgba(0, 0, 0, 0.027),
+    0px 0.8px 2.925px rgba(0, 0, 0, 0.02),
+    0px 0.175px 1.04062px rgba(0, 0, 0, 0.01);
+
+  --shadow-deep: 0px 1px 3px rgba(0, 0, 0, 0.01),
+    0px 3px 7px rgba(0, 0, 0, 0.02),
+    0px 7px 15px rgba(0, 0, 0, 0.02),
+    0px 14px 28px rgba(0, 0, 0, 0.04),
+    0px 23px 52px rgba(0, 0, 0, 0.05);
+
+  /* ----- Border Radius ----- */
+  --radius-micro: 4px;
+  --radius-subtle: 5px;
+  --radius-standard: 8px;
+  --radius-comfortable: 12px;
+  --radius-large: 16px;
+  --radius-pill: 9999px;
+  --radius-circle: 100%;
+
+  /* ----- Spacing (8px base + organic extras) ----- */
+  --spacing: 0.125rem;      /* 2px base unit (multiplied by 4 = 8px) */
+  --spacing-0: 0px;
+  --spacing-1: 4px;         /* 0.25rem = 4px */
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-5: 24px;
+  --spacing-6: 32px;
+  --spacing-7: 48px;
+  --spacing-8: 64px;
+  --spacing-9: 80px;
+  --spacing-10: 96px;
+  --spacing-11: 120px;
+
+  /* Custom fractional values */
+  --spacing-0_5: 2px;
+  --spacing-1_5: 6px;
+  --spacing-2_5: 10px;
+  --spacing-3_5: 14px;
+  --spacing-4_5: 20px;
+  --spacing-5_5: 28px;
+  --spacing-6_5: 40px;
+  --spacing-7_5: 56px;
+
+  /* ----- Borders ----- */
+  --border-width-whisper: 1px;
+  --border-color-whisper: rgba(0, 0, 0, 0.1);
 }
 
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
-}
-
+/* ----------------------------
+   3. Base Styles (Global)
+   ---------------------------- */
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
   html {
-    @apply font-sans;
+    font-family: var(--font-sans);
+    background-color: var(--color-white);
+    color: var(--color-black);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-size: var(--font-size-body);
+    line-height: var(--line-height-body);
+    background-color: var(--color-white);
+    color: var(--color-black);
+    margin: 0;
+  }
+
+  /* Heading defaults (use utility classes for fine control) */
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    letter-spacing: normal; /* will be overridden by utilities */
+    line-height: 1.2;
+  }
+
+  /* Links inherit Notion Blue and underline on hover */
+  a {
+    color: var(--color-notion-blue);
+    text-decoration: none;
+    transition: color 0.1s ease;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+
+  /* Focus ring – accessible and matches Notion style */
+  :focus-visible {
+    outline: 2px solid var(--color-focus-blue);
+    outline-offset: 2px;
+    border-radius: var(--radius-micro);
+  }
+
+  /* Remove default button styles but keep accessible */
+  button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+  }
+}
+
+/* ----------------------------
+   4. Component Utilities (match Notion patterns)
+   ---------------------------- */
+@layer utilities {
+  /* Whisper border – the Notion way */
+  .border-whisper {
+    border: var(--border-width-whisper) solid var(--border-color-whisper);
+  }
+
+  /* Card shadow (Level 2) */
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+
+  /* Deep shadow (Level 3 – modals, featured) */
+  .shadow-deep {
+    box-shadow: var(--shadow-deep);
+  }
+
+  /* Primary blue button */
+  .btn-primary {
+    background-color: var(--color-notion-blue);
+    color: var(--color-white);
+    padding: var(--spacing-2) var(--spacing-4);
+    border-radius: var(--radius-micro);
+    font-weight: 600;
+    transition: background-color 0.1s, transform 0.1s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .btn-primary:hover {
+    background-color: var(--color-notion-blue-dark);
+    transform: scale(1.02);
+  }
+  .btn-primary:active {
+    transform: scale(0.98);
+  }
+
+  /* Secondary / Tertiary button (translucent warm gray) */
+  .btn-secondary {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: var(--color-black);
+    padding: var(--spacing-2) var(--spacing-4);
+    border-radius: var(--radius-micro);
+    font-weight: 600;
+    transition: transform 0.1s;
+  }
+  .btn-secondary:hover {
+    transform: scale(1.02);
+  }
+  .btn-secondary:active {
+    transform: scale(0.98);
+  }
+
+  /* Ghost / link button */
+  .btn-ghost {
+    background: transparent;
+    color: var(--color-black);
+    padding: var(--spacing-2) var(--spacing-4);
+    font-weight: 500;
+  }
+  .btn-ghost:hover {
+    text-decoration: underline;
+  }
+
+  /* Pill badge */
+  .badge-pill {
+    background-color: var(--color-badge-blue-bg);
+    color: var(--color-badge-blue-text);
+    border-radius: var(--radius-pill);
+    padding: 4px 8px;
+    font-size: var(--font-size-badge);
+    font-weight: 600;
+    letter-spacing: var(--letter-spacing-badge);
+    line-height: var(--line-height-badge);
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+
+  /* Standard card container */
+  .card {
+    background-color: var(--color-white);
+    border: var(--border-width-whisper) solid var(--border-color-whisper);
+    border-radius: var(--radius-comfortable);
+    box-shadow: var(--shadow-card);
+    padding: var(--spacing-5);
+    transition: box-shadow 0.2s;
+  }
+  .card:hover {
+    box-shadow: var(--shadow-deep);
+  }
+
+  /* Section background alternation */
+  .section-warm {
+    background-color: var(--color-warm-white);
+  }
+  .section-white {
+    background-color: var(--color-white);
+  }
+
+  /* Max content container */
+  .container-notion {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--spacing-5);
+    padding-right: var(--spacing-5);
+  }
+
+  /* Responsive heading letter-spacing compression (applies the spec) */
+  @media (max-width: 768px) {
+    .heading-display {
+      font-size: 40px !important;
+      letter-spacing: -1.2px !important;
+    }
+    .heading-section {
+      font-size: 36px !important;
+      letter-spacing: -1px !important;
+    }
+  }
+}
+
+/* ----------------------------
+   5. Utility Variants for Typography
+   (Apply using class composition)
+   ---------------------------- */
+@layer components {
+  .heading-display {
+    font-size: var(--font-size-display-hero);
+    line-height: var(--line-height-display-hero);
+    letter-spacing: var(--letter-spacing-display-hero);
+    font-weight: 700;
+  }
+  .heading-display-secondary {
+    font-size: var(--font-size-display-secondary);
+    line-height: var(--line-height-display-secondary);
+    letter-spacing: var(--letter-spacing-display-secondary);
+    font-weight: 700;
+  }
+  .heading-section {
+    font-size: var(--font-size-section-heading);
+    line-height: var(--line-height-section-heading);
+    letter-spacing: var(--letter-spacing-section-heading);
+    font-weight: 700;
+  }
+  .heading-sub {
+    font-size: var(--font-size-subheading);
+    line-height: var(--line-height-subheading);
+    letter-spacing: var(--letter-spacing-subheading);
+    font-weight: 700;
+  }
+  .text-body-large {
+    font-size: var(--font-size-body-large);
+    line-height: var(--line-height-body-large);
+    letter-spacing: var(--letter-spacing-body-large);
+    font-weight: 600;
+  }
+  .text-body {
+    font-size: var(--font-size-body);
+    line-height: var(--line-height-body);
+    font-weight: 400;
+  }
+  .text-secondary {
+    color: var(--color-warm-gray-500);
+  }
+  .text-muted {
+    color: var(--color-warm-gray-300);
   }
 }
