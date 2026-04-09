@@ -2,25 +2,11 @@
 
 @import "tailwindcss";
 
-/* ----------------------------
-   1. Custom Font (NotionInter)
-   ---------------------------- */
-@font-face {
-  font-family: 'NotionInter';
-  src: url('/fonts/NotionInter.woff2') format('woff2');
-  font-weight: 400 700;
-  font-display: swap;
-  /* fallback: system fonts will be used if custom font fails */
-}
 
 /* ----------------------------
    2. Theme Configuration
    ---------------------------- */
 @theme {
-  /* ----- Font Family ----- */
-  --font-sans: 'NotionInter', 'Inter', -apple-system, system-ui, 'Segoe UI', Helvetica,
-    'Apple Color Emoji', Arial, 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
-
   /* ----- Color Palette ----- */
   --color-*: initial; /* disable default colors to enforce Notion palette */
 
@@ -148,7 +134,6 @@
    ---------------------------- */
 @layer base {
   html {
-    font-family: var(--font-sans);
     background-color: var(--color-white);
     color: var(--color-black);
     -webkit-font-smoothing: antialiased;

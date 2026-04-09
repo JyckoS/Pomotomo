@@ -7,15 +7,15 @@ import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertCircle } from "lucide-react";
 import React from "react";
-import { redirect } from "next/dist/server/api-utils";
+import { registerUser } from "@/actions/auth/users";
 
 export default function RegisterForm() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
   const [error, setError] = React.useState("");
-
-  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
+  const [isLoading, setIsLoading] = React.useState(false);
+  const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     let err = "";
     if (password !== confirmPassword) err = "Passwords do not match";
@@ -26,7 +26,14 @@ export default function RegisterForm() {
     }
     setError("");
     console.log(`Register with: ${email} and ${password}`);
-    redirect
+    setIsLoading(true);
+    try {
+      await registerUser(email);
+    } catch (err) {
+      setError("Registration Failed");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -102,8 +109,10 @@ export default function RegisterForm() {
             <Button
               type="submit"
               className="w-full bg-notion-blue text-white hover:bg-notion-blue-dark rounded-sm transition-transform active:scale-95"
+              disabled={isLoading}
+
             >
-              Sign Up
+              {isLoading ? "Registering..." : "Register"}
             </Button>
           </form>
         </CardContent>
